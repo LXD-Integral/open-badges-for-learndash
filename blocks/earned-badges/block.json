@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "obld/earned-badges",
+	"title": "Earned Badges",
+	"category": "widgets",
+	"icon": "awards",
+	"description": "Show the badges the current visitor has earned.",
+	"keywords": [ "badge", "open badges", "learndash" ],
+	"textdomain": "open-badges-for-learndash",
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"size": {
+			"type": "number",
+			"default": 96
+		},
+		"showName": {
+			"type": "boolean",
+			"default": true
+		},
+		"link": {
+			"type": "boolean",
+			"default": false
+		},
+		"showExport": {
+			"type": "boolean",
+			"default": true
+		},
+		"showVerify": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"editorScript": "file:./index.js"
+}

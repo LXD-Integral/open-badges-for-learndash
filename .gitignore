@@ -1,0 +1,40 @@
+# Composer
+/vendor/
+
+# Node / block build output (built by `npm run build`, and by CI for releases)
+node_modules/
+/build/
+/dist/
+
+# Logs
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local-only files (never commit credentials or machine-specific config)
+*.local
+.phpunit.result.cache
+
+# Credentials — the canonical copy lives outside every repo
+# (~/Sites/obf-provider-credentials.md, mode 600). These patterns are
+# deliberately narrow so they cannot shadow src/Credentials/*.php: they match
+# only credential-shaped data files, never PHP sources.
+*api-key*.txt
+*api-keys*.txt
+*credentials*.txt
+*credentials*.md
+*secrets*.txt
+*secrets*.md
+*.pem
+*.key
+!*.php
+/sfwd-lms*.zip
+/learndash*.zip
+
+# Dan's personal reference material (activity logs, background research,
+# environment notes) — never part of the public repo or releases.
+/dan-docs/

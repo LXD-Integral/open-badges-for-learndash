@@ -1,0 +1,37 @@
+name: Update WordPress.org readme and assets
+
+# Between releases, a change to readme.txt (for example "Tested up to") or to
+# the banner/icon/screenshots can be published without a new plugin version.
+# Runs only when those files change on master, and only once the repository
+# variable WPORG_SVN_READY is true (the action has no dry-run mode: it commits).
+# Only the readme and the assets are synced; the plugin files in trunk are
+# left to the release workflow.
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'readme.txt'
+      - '.wordpress-org/**'
+  workflow_dispatch:
+
+env:
+  SLUG: open-badges-for-learndash
+
+jobs:
+  update:
+    name: Push readme and assets to SVN
+    if: vars.WPORG_SVN_READY == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SLUG: ${{ env.SLUG }}
+          ASSETS_DIR: .wordpress-org
+          README_NAME: readme.txt
+          IGNORE_OTHER_FILES: 'true'
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}

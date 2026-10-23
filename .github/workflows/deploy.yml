@@ -1,0 +1,81 @@
+name: Deploy to WordPress.org
+
+# Pushing a release tag (v1.0.0) builds the plugin exactly as CI does and
+# commits it to the WordPress.org SVN repository: trunk/, tags/<version>/ and
+# the directory assets.
+#
+# Two switches, both off until the plugin is approved:
+#   Repository variable WPORG_SVN_READY = true
+#       The SVN repository exists (it is created on approval). Until then the
+#       SVN step is skipped entirely; the build and version check still run.
+#   DRY_RUN below
+#       true  = check out SVN, stage everything, commit nothing.
+#       false = commit. Flip after one successful dry run.
+#
+# Secrets (repository settings → Secrets → Actions), needed even for a dry run:
+#   SVN_USERNAME  WordPress.org username (lxdintegral)
+#   SVN_PASSWORD  the SVN password generated in the WordPress.org profile
+#                 (not the account password)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  SLUG: open-badges-for-learndash
+  DRY_RUN: 'true'
+
+jobs:
+  deploy:
+    name: Build and deploy ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build the block
+        run: |
+          npm ci
+          npm run build
+
+      # Same allow-list as CI, so the deployed tree is the tested tree.
+      - name: Stage the plugin
+        run: |
+          set -euo pipefail
+          mkdir -p "dist/$SLUG"
+          cp open-badges-for-learndash.php uninstall.php readme.txt README.md LICENSE "dist/$SLUG/"
+          cp -R src build blocks languages docs "dist/$SLUG/"
+          test -f "dist/$SLUG/build/earned-badges/block.json"
+
+      - name: The tag must match the plugin version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          set -euo pipefail
+          header=$(sed -n 's/^ \* Version: *//p' "dist/$SLUG/$SLUG.php")
+          stable=$(sed -n 's/^Stable tag: *//p' "dist/$SLUG/readme.txt")
+          tag="${GITHUB_REF_NAME#v}"
+          echo "tag=$tag header=$header stable=$stable"
+          test "$tag" = "$header" && test "$tag" = "$stable"
+
+      - name: SVN not ready yet
+        if: vars.WPORG_SVN_READY != 'true'
+        run: echo "::notice::WPORG_SVN_READY is not set; built and verified, SVN step skipped."
+
+      # The action derives the WordPress.org tag from the git tag (v1.0.0 -> 1.0.0).
+      - name: Deploy to WordPress.org SVN
+        if: vars.WPORG_SVN_READY == 'true'
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          dry-run: ${{ env.DRY_RUN == 'true' }}
+          generate-zip: true
+        env:
+          SLUG: ${{ env.SLUG }}
+          BUILD_DIR: dist/${{ env.SLUG }}
+          ASSETS_DIR: .wordpress-org
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}

@@ -1,0 +1,26 @@
+# Paths excluded from the WordPress.org deploy (10up/action-wordpress-plugin-deploy).
+# The CI release job stages by allow-list; this file mirrors it for any
+# tooling that deploys from the repository root instead of a build directory.
+/.git
+/.github
+/.wordpress-org
+/.claude
+/_build_plan
+/dan-docs
+/node_modules
+/tests
+/vendor
+/zzz_archive
+/.distignore
+/.gitignore
+/.phpunit.result.cache
+/AGENTS.md
+/composer.json
+/composer.lock
+/package.json
+/package-lock.json
+/phpcs.xml.dist
+/phpunit.xml.dist
+.DS_Store
+*.log
+*.zip

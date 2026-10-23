@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<ruleset name="OBLD">
+    <description>Coding standards for Open Badges for LearnDash.</description>
+
+    <file>open-badges-for-learndash.php</file>
+    <file>uninstall.php</file>
+    <file>src</file>
+
+    <arg name="extensions" value="php"/>
+    <arg name="basepath" value="."/>
+    <arg value="sp"/>
+
+    <config name="minimum_wp_version" value="6.5"/>
+
+    <rule ref="WordPress">
+        <!-- PSR-4 file naming (Composer autoloading) instead of class-*.php. -->
+        <exclude name="WordPress.Files.FileName"/>
+        <!-- This plugin owns custom tables; direct queries are its purpose. -->
+        <exclude name="WordPress.DB.DirectDatabaseQuery"/>
+        <!-- Short array syntax is fine in 2026. -->
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+    </rule>
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="open-badges-for-learndash"/>
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="obld"/>
+                <element value="OBLD"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

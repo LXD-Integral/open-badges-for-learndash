@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Open Badges for LearnDash: directory icon. Generated from the same geometry as icon-256x256.png. -->
+  <rect width="256" height="256" fill="#010c4d"/>
+  <polygon points="83.6,168.2 120.2,168.2 120.2,250.9 101.9,234.4 83.6,250.9" fill="#03daff"/>
+  <polygon points="135.8,168.2 172.4,168.2 172.4,250.9 154.1,234.4 135.8,250.9" fill="#03daff"/>
+  <polygon points="203.4,163.8 128.0,207.4 52.6,163.8 52.6,76.8 128.0,33.3 203.4,76.8" fill="#03daff"/>
+  <polygon points="192.8,157.7 128.0,195.2 63.2,157.7 63.2,82.9 128.0,45.5 192.8,82.9" fill="#001cbe"/>
+  <polygon points="183.8,152.5 128.0,184.7 72.2,152.5 72.2,88.1 128.0,55.9 183.8,88.1" fill="#03daff"/>
+  <polygon points="180.8,150.8 128.0,181.2 75.2,150.8 75.2,89.9 128.0,59.4 180.8,89.9" fill="#001cbe"/>
+  <polyline points="98.4,122.1 121.0,144.7 161.1,97.7" fill="none" stroke="#ffffff" stroke-width="13.9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
