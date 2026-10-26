@@ -10,7 +10,7 @@
     <arg name="basepath" value="."/>
     <arg value="sp"/>
 
-    <config name="minimum_wp_version" value="6.5"/>
+    <config name="minimum_wp_version" value="6.6"/>
 
     <rule ref="WordPress">
         <!-- PSR-4 file naming (Composer autoloading) instead of class-*.php. -->

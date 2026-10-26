@@ -48,7 +48,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "dist/$SLUG"
-          cp open-badges-for-learndash.php uninstall.php readme.txt README.md LICENSE "dist/$SLUG/"
+          cp open-badges-for-learndash.php uninstall.php readme.txt changelog.txt README.md LICENSE "dist/$SLUG/"
           cp -R src build blocks languages docs "dist/$SLUG/"
           test -f "dist/$SLUG/build/earned-badges/block.json"
 

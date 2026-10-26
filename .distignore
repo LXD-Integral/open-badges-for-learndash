@@ -4,6 +4,7 @@
 /.git
 /.github
 /.wordpress-org
+/bin
 /.claude
 /_build_plan
 /dan-docs

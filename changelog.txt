@@ -1,0 +1,43 @@
+Open Badges for LearnDash changelog
+===================================
+
+The current release is described in readme.txt. This file keeps the full
+history, including the pre-release builds distributed before the plugin was
+listed in the WordPress plugin directory.
+
+1.0.0 (2026-10)
+---------------
+* First release in the WordPress plugin directory.
+* Built-in PSR-4 autoloader; the plugin ships no vendor directory.
+* Activity log CSV export neutralises spreadsheet formula characters and
+  writes RFC 4180 CSV.
+* Export and Erase Personal Data support for award and log records.
+* Admin script and styles go through the enqueue API; the provider base-URL
+  filter accepts HTTPS only; API requests never follow redirects.
+* Uninstall clears queued per-award cron events with wp_unschedule_hook().
+* Minimum WordPress version is 6.6: the block editor script needs the
+  react-jsx-runtime script, which WordPress registers from 6.6.
+* Tested on WordPress 6.6 and 7.1, PHP 8.1 to 8.4, with WP_DEBUG on.
+
+0.4.0 (2026-09-05)
+------------------
+* Badge status sync: revoked badges are hidden, expiry dates shown, and a
+  "Saved to Passport" mark replaces the claim link once the learner has saved
+  the badge.
+* Refresh Award Status action on the Badges screen.
+
+0.3.0 (2026-08-23)
+------------------
+* Verify opens the provider's hosted validator; linked badge images open the
+  provider's badge page.
+* Page-cache cooperation: viewer-specific lists are not cached and issuance
+  purges the cache.
+
+0.2.0 (2026-08-17)
+------------------
+* Save & share and Verify links on every earned badge.
+
+0.1.0 (2026-08-04)
+------------------
+* First demo build: provider connections, badge sync, triggers, automatic and
+  manual issuance, backfill, shortcode and block display, activity log.

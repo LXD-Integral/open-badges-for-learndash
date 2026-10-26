@@ -22,5 +22,7 @@ the GitHub front page. Keep the version in sync across the plugin header, `OBLD_
 the stable tag agree. The plugin ships no `vendor/`: `open-badges-for-learndash.php` carries a
 PSR-4 autoloader for `src/`, and Composer exists only for PHPUnit and PHPCS. CI stages the
 release by allow-list, runs Plugin Check against the staged directory, and installs the zip on
-WordPress 6.5 and latest. Plugin Check warnings about direct database queries are expected:
+WordPress 6.6 and latest with `WP_DEBUG` on (every admin screen is loaded and the debug log must
+stay free of plugin notices). The minimum is 6.6 because the compiled block depends on the
+`react-jsx-runtime` script, which WordPress registers from 6.6. Plugin Check warnings about direct database queries are expected:
 the plugin owns four custom tables, and every value is bound through `$wpdb->prepare()`.
