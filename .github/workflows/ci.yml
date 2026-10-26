@@ -195,6 +195,8 @@ jobs:
           wp plugin uninstall open-badges-for-learndash
           echo "--- debug.log ---"
           touch wp-content/debug.log && cat wp-content/debug.log
-          if grep -E 'PHP (Warning|Notice|Deprecated|Fatal|Parse)' wp-content/debug.log | grep -q 'open-badges-for-learndash'; then
+          # Match the plugin's install path only: the runner's checkout directory
+          # shares the slug, so core's own deprecations would otherwise match.
+          if grep -E 'PHP (Warning|Notice|Deprecated|Fatal|Parse)' wp-content/debug.log | grep -q '/wp-content/plugins/open-badges-for-learndash/'; then
             echo "The plugin logged PHP notices with WP_DEBUG on."; exit 1
           fi
