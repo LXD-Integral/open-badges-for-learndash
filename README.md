@@ -37,7 +37,7 @@ Factory, CanCred, LearnDash, or StellarWP.
 ## Requirements
 
 - PHP 8.1+
-- WordPress 6.5+
+- WordPress 6.6+
 - LearnDash (developed against 4.x and 5.x; the plugin activates and can be configured without it)
 - An Open Badge Factory or CanCred account with API access (Pro subscription) — API credentials
   are created in the provider's **Admin tools → API** screen
@@ -96,7 +96,8 @@ in `blocks/` with `@wordpress/scripts`; both ship in the release.
 
 CI (GitHub Actions) lints and tests on PHP 8.1–8.4, stages the release archive, runs the
 WordPress.org [Plugin Check](https://wordpress.org/plugins/plugin-check/) against it, and installs
-the archive on WordPress 6.5 and the latest release.
+the archive on WordPress 6.6 and the latest release with `WP_DEBUG` on, loading every
+admin screen and failing on any PHP notice, warning or deprecation from the plugin.
 
 User documentation — an FAQ and material expanding on this README — lives in
 [docs/](docs/) and ships inside the release archive. The WordPress.org listing text is

@@ -197,7 +197,7 @@ final class ActivityLogPage {
 
 		$out = fopen( 'php://output', 'w' );
 
-		fputcsv(
+		self::write_csv_row(
 			$out,
 			array(
 				__( 'Date (UTC)', 'open-badges-for-learndash' ),
@@ -221,7 +221,7 @@ final class ActivityLogPage {
 			$found = count( $rows );
 
 			foreach ( $rows as $row ) {
-				fputcsv(
+				self::write_csv_row(
 					$out,
 					array_map(
 						array( $this, 'csv_cell' ),
@@ -244,6 +244,20 @@ final class ActivityLogPage {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php://output is a stream, not a file; WP_Filesystem cannot write it.
 		fclose( $out );
 		exit;
+	}
+
+	/**
+	 * Write one RFC 4180 CSV row.
+	 *
+	 * Separator, enclosure and escape are passed explicitly: PHP 8.4 deprecates
+	 * relying on the default escape character, and an empty escape is what
+	 * RFC 4180 (and Excel) expect: quotes are doubled, never backslashed.
+	 *
+	 * @param resource      $handle Output stream.
+	 * @param array<string> $fields Cell values.
+	 */
+	private static function write_csv_row( $handle, array $fields ): void {
+		fputcsv( $handle, $fields, ',', '"', '' );
 	}
 
 	/**

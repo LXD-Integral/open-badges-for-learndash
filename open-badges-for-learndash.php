@@ -4,7 +4,7 @@
  * Plugin URI:        https://github.com/LXD-Integral/open-badges-for-learndash
  * Description:       Automatically issue Open Badges to LearnDash learners via Open Badge Factory or CanCred.
  * Version:           1.0.0
- * Requires at least: 6.5
+ * Requires at least: 6.6
  * Requires PHP:      8.1
  * Author:            LXD Integral Learning Ltd.
  * Author URI:        https://lxdintegral.com

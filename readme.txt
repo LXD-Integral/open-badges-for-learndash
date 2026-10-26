@@ -1,7 +1,7 @@
 === Open Badges for LearnDash ===
 Contributors: lxdintegral
 Tags: open badges, learndash, badges, credentials, cancred
-Requires at least: 6.5
+Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
 Stable tag: 1.0.0
@@ -29,11 +29,11 @@ Open Badges for LearnDash connects your LearnDash site to **Open Badge Factory**
 
 **Independent plugin**
 
-Open Badges for LearnDash is developed and published independently by LXD Integral Learning Ltd. It is not affiliated with, supported by, or endorsed by Open Badge Factory, CanCred, Learning Agents, LearnDash, or StellarWP. "LearnDash" is a trademark of its respective owner and is used only to describe which product this plugin works with.
+Open Badges for LearnDash is developed and published independently by LXD Integral Learning Ltd. It is not affiliated with, supported by, or endorsed by Open Badge Factory, CanCred, Learning Agents, LearnDash, StellarWP, or 1EdTech. "LearnDash" is a trademark of its respective owner and is used only to describe which product this plugin works with. Open Badges is an open standard maintained by 1EdTech; the plugin issues badges that follow it through the providers above, and is not itself a 1EdTech product or certification.
 
 **Requirements**
 
-* WordPress 6.5 or newer and PHP 8.1 or newer.
+* WordPress 6.6 or newer and PHP 8.1 or newer.
 * LearnDash LMS (a separate, commercial plugin). The plugin activates and can be configured without LearnDash, but no badges are awarded until LearnDash is active.
 * An Open Badge Factory or CanCred Factory account with API access. API credentials (Client ID and Client Secret) are created in the provider's console under **Admin tools → API**.
 
@@ -56,7 +56,7 @@ Background work (issuing, retries, link fetching, status checks) runs through WP
 
 **Source code**
 
-The block editor script ships as compiled JavaScript in `build/`; its source is included in `blocks/` and in the public repository at [github.com/LXD-Integral/open-badges-for-learndash](https://github.com/LXD-Integral/open-badges-for-learndash), together with the build instructions.
+The block editor script ships as compiled JavaScript in `build/`; its human-readable source is included in `blocks/` and in the public repository at [github.com/LXD-Integral/open-badges-for-learndash](https://github.com/LXD-Integral/open-badges-for-learndash). To rebuild it, run `npm install` and then `npm run build` in the plugin directory; the build uses `@wordpress/scripts`. The PHP needs no build step.
 
 == Installation ==
 
@@ -151,26 +151,14 @@ Nothing is deleted by default: uninstalling preserves your badges, triggers, awa
 
 = 1.0.0 =
 * First release in the WordPress plugin directory.
-* Replaced the Composer autoloader with a built-in PSR-4 autoloader; the plugin ships no vendor directory.
-* Activity log CSV export now neutralises spreadsheet formula characters at the start of a cell.
-* Uninstall clears queued per-award cron events with `wp_unschedule_hook()`.
+* Built-in PSR-4 autoloader; the plugin ships no vendor directory.
+* Activity log CSV export neutralises spreadsheet formula characters and writes RFC 4180 CSV.
 * Export and Erase Personal Data support for award and log records.
-* Admin script and styles now go through the enqueue API; the provider base-URL filter accepts HTTPS only; API requests never follow redirects.
-* Tested on WordPress 6.5 and 7.1, PHP 8.1 to 8.4.
+* Admin script and styles go through the enqueue API; the provider base-URL filter accepts HTTPS only; API requests never follow redirects.
+* Uninstall clears queued per-award cron events with `wp_unschedule_hook()`.
+* Tested on WordPress 6.6 and 7.1, PHP 8.1 to 8.4, with `WP_DEBUG` on.
 
-= 0.4.0 =
-* Badge status sync: revoked badges are hidden, expiry dates shown, and a "Saved to Passport" mark replaces the claim link once the learner has saved the badge.
-* Refresh Award Status action on the Badges screen.
-
-= 0.3.0 =
-* Verify opens the provider's hosted validator; linked badge images open the provider's badge page.
-* Page-cache cooperation: viewer-specific lists are not cached and issuance purges the cache.
-
-= 0.2.0 =
-* Save & share and Verify links on every earned badge.
-
-= 0.1.0 =
-* First demo build: provider connections, badge sync, triggers, automatic and manual issuance, backfill, shortcode and block display, activity log.
+The pre-release history (0.1.0 to 0.4.0) is in `changelog.txt`.
 
 == Upgrade Notice ==
 
